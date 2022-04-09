@@ -5,6 +5,9 @@ import 'package:grocery_app/services/utils.dart';
 import 'package:grocery_app/widgets/heart_btn.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 
+import '../inner_screens/on_sale_screen.dart';
+import '../inner_screens/product_details.dart';
+import '../services/global_methods.dart';
 import 'price_widget.dart';
 
 class OnSaleWidget extends StatefulWidget {
@@ -27,7 +30,10 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
         borderRadius: BorderRadius.circular(12),
         child: InkWell(
           borderRadius: BorderRadius.circular(12),
-          onTap: () {},
+          onTap: () {
+            GlobalMethods.navigateTo(
+                ctx: context, routeName: ProductDetails.routeName);
+          },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,19 +69,19 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                   color: color,
                                 ),
                               ),
-                             HeartBTN(),
+                              HeartBTN(),
                             ],
                           ),
                         ],
                       )
                     ],
                   ),
-                const   PriceWidget(
-                     salePrice: 2.99,
-                     price: 5.9,
-                     textPrice:'1',
-                     isOnSale: true,
-                   ),
+                  const PriceWidget(
+                    salePrice: 2.99,
+                    price: 5.9,
+                    textPrice: '1',
+                    isOnSale: true,
+                  ),
                   const SizedBox(height: 5),
                   TextWidget(
                     text: 'Product title',

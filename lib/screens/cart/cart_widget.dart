@@ -2,9 +2,12 @@ import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:grocery_app/inner_screens/product_details.dart';
 import 'package:grocery_app/widgets/heart_btn.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 
+import '../../inner_screens/on_sale_screen.dart';
+import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 
 class CartWidget extends StatefulWidget {
@@ -33,7 +36,10 @@ class _CartWidgetState extends State<CartWidget> {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        GlobalMethods.navigateTo(
+            ctx: context, routeName: ProductDetails.routeName);
+      },
       child: Row(
         children: [
           Expanded(
@@ -141,7 +147,9 @@ class _CartWidgetState extends State<CartWidget> {
                         ],
                       ),
                     ),
-                    const SizedBox(width: 5,),
+                    const SizedBox(
+                      width: 5,
+                    ),
                   ],
                 ),
               ),

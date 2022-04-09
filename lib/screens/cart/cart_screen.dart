@@ -74,7 +74,14 @@ class CartScreen extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          FittedBox(child: TextWidget(text: 'Total: \$0.259', color: color, textSize: 18, isTitle: true,))
+          FittedBox(
+            child: TextWidget(
+              text: 'Total: \$0.259',
+              color: color,
+              textSize: 18,
+              isTitle: true,
+            ),
+          ),
         ]),
       ),
     );
