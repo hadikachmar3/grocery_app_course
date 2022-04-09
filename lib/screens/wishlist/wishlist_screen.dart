@@ -31,11 +31,13 @@ class WishlistScreen extends StatelessWidget {
             ),
             actions: [
               IconButton(
-                onPressed: () {   GlobalMethods.warningDialog(
-                    title: 'Empty your wishlist?',
-                    subtitle: 'Are you sure?',
-                    fct: () {},
-                    context: context);},
+                onPressed: () {
+                  GlobalMethods.warningDialog(
+                      title: 'Empty your wishlist?',
+                      subtitle: 'Are you sure?',
+                      fct: () {},
+                      context: context);
+                },
                 icon: Icon(
                   IconlyBroken.delete,
                   color: color,

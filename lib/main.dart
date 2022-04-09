@@ -8,6 +8,7 @@ import 'consts/theme_data.dart';
 import 'inner_screens/feeds_screen.dart';
 import 'inner_screens/product_details.dart';
 import 'screens/btm_bar.dart';
+import 'screens/orders/orders_screen.dart';
 import 'screens/wishlist/wishlist_screen.dart';
 
 void main() {
@@ -55,6 +56,7 @@ class _MyAppState extends State<MyApp> {
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
               ProductDetails.routeName: (ctx) => const ProductDetails(),
               WishlistScreen.routeName: (ctx) => const WishlistScreen(),
+              OrdersScreen.routeName: (ctx) => const OrdersScreen(),
             });
       }),
     );
