@@ -141,7 +141,17 @@ class _ProductDetailsState extends State<ProductDetails> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     quantityControl(
-                      fct: () {},
+                      fct: () {
+                        if (_quantityTextController.text == '1') {
+                          return;
+                        } else {
+                          setState(() {
+                            _quantityTextController.text =
+                                (int.parse(_quantityTextController.text) - 1)
+                                    .toString();
+                          });
+                        }
+                      },
                       icon: CupertinoIcons.minus,
                       color: Colors.red,
                     ),
@@ -177,7 +187,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                       width: 5,
                     ),
                     quantityControl(
-                      fct: () {},
+                      fct: () {
+                        setState(() {
+                          _quantityTextController.text =
+                              (int.parse(_quantityTextController.text) + 1)
+                                  .toString();
+                        });
+                      },
                       icon: CupertinoIcons.plus,
                       color: Colors.green,
                     ),
@@ -221,7 +237,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                                     isTitle: true,
                                   ),
                                   TextWidget(
-                                    text: '1Kg',
+                                    text: '${_quantityTextController.text}Kg',
                                     color: color,
                                     textSize: 16,
                                     isTitle: false,
