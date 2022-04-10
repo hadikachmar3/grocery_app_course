@@ -25,12 +25,11 @@ class _OrderWidgetState extends State<OrderWidget> {
         GlobalMethods.navigateTo(
             ctx: context, routeName: ProductDetails.routeName);
       },
-      leading:  FancyShimmerImage(
-          width: size.width * 0.2,
-          imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
-          boxFit: BoxFit.fill,
-        ),
-      
+      leading: FancyShimmerImage(
+        width: size.width * 0.2,
+        imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+        boxFit: BoxFit.fill,
+      ),
       title: TextWidget(text: 'Title  x12', color: color, textSize: 18),
       trailing: TextWidget(text: '03/08/2022', color: color, textSize: 18),
     );

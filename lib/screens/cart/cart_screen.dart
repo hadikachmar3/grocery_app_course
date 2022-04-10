@@ -5,6 +5,7 @@ import 'package:grocery_app/widgets/text_widget.dart';
 
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
+import '../../widgets/empty_screen.dart';
 
 class CartScreen extends StatelessWidget {
   const CartScreen({Key? key}) : super(key: key);
@@ -13,45 +14,53 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
-    return Scaffold(
-      appBar: AppBar(
-          elevation: 0,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          title: TextWidget(
-            text: 'Cart (2)',
-            color: color,
-            isTitle: true,
-            textSize: 22,
-          ),
-          actions: [
-            IconButton(
-              onPressed: () {
-                GlobalMethods.warningDialog(
-                    title: 'Empty your cart?',
-                    subtitle: 'Are you sure?',
-                    fct: () {},
-                    context: context);
-              },
-              icon: Icon(
-                IconlyBroken.delete,
-                color: color,
-              ),
+    bool _isEmpty = true;
+    return _isEmpty
+        ? const EmptyScreen(
+            title: 'Your cart is empty',
+            subtitle: 'Add something and make me happy :)',
+            buttonText: 'Shop now',
+            imagePath: 'assets/images/cart.png',
+          )
+        : Scaffold(
+            appBar: AppBar(
+                elevation: 0,
+                backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                title: TextWidget(
+                  text: 'Cart (2)',
+                  color: color,
+                  isTitle: true,
+                  textSize: 22,
+                ),
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      GlobalMethods.warningDialog(
+                          title: 'Empty your cart?',
+                          subtitle: 'Are you sure?',
+                          fct: () {},
+                          context: context);
+                    },
+                    icon: Icon(
+                      IconlyBroken.delete,
+                      color: color,
+                    ),
+                  ),
+                ]),
+            body: Column(
+              children: [
+                _checkout(ctx: context),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 10,
+                    itemBuilder: (ctx, index) {
+                      return CartWidget();
+                    },
+                  ),
+                ),
+              ],
             ),
-          ]),
-      body: Column(
-        children: [
-          _checkout(ctx: context),
-          Expanded(
-            child: ListView.builder(
-              itemCount: 10,
-              itemBuilder: (ctx, index) {
-                return CartWidget();
-              },
-            ),
-          ),
-        ],
-      ),
-    );
+          );
   }
 
   Widget _checkout({required BuildContext ctx}) {
