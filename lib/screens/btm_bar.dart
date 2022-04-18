@@ -18,7 +18,7 @@ class BottomBarScreen extends StatefulWidget {
 }
 
 class _BottomBarScreenState extends State<BottomBarScreen> {
-  int _selectedIndex = 2;
+  int _selectedIndex = 0;
   final List<Map<String, dynamic>> _pages = [
     {
       'page': const HomeScreen(),
@@ -36,6 +36,8 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       'page': const UserScreen(),
       'title': 'user Screen',
     },
+
+
   ];
   void _selectedPage(int index) {
     setState(() {

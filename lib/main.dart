@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/inner_screens/on_sale_screen.dart';
 import 'package:grocery_app/provider/dark_theme_provider.dart';
+import 'package:grocery_app/providers/products_provider.dart';
 import 'package:grocery_app/screens/home_screen.dart';
 import 'package:grocery_app/screens/viewed_recently/viewed_recently.dart';
 import 'package:provider/provider.dart';
 
 import 'consts/theme_data.dart';
+import 'inner_screens/cat_screen.dart';
 import 'inner_screens/feeds_screen.dart';
 import 'inner_screens/product_details.dart';
+import 'providers/cart_provider.dart';
 import 'screens/auth/forget_pass.dart';
 import 'screens/auth/login.dart';
 import 'screens/auth/register.dart';
@@ -46,7 +49,13 @@ class _MyAppState extends State<MyApp> {
       providers: [
         ChangeNotifierProvider(create: (_) {
           return themeChangeProvider;
-        })
+        }),
+        ChangeNotifierProvider(
+          create: (_) => ProductsProvider(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => CartProvider(),
+        ),
       ],
       child:
           Consumer<DarkThemeProvider>(builder: (context, themeProvider, child) {
@@ -54,7 +63,7 @@ class _MyAppState extends State<MyApp> {
             debugShowCheckedModeBanner: false,
             title: 'Flutter Demo',
             theme: Styles.themeData(themeProvider.getDarkTheme, context),
-            home: const LoginScreen(),
+            home: const BottomBarScreen(),
             routes: {
               OnSaleScreen.routeName: (ctx) => const OnSaleScreen(),
               FeedsScreen.routeName: (ctx) => const FeedsScreen(),
@@ -65,7 +74,9 @@ class _MyAppState extends State<MyApp> {
                   const ViewedRecentlyScreen(),
               RegisterScreen.routeName: (ctx) => const RegisterScreen(),
               LoginScreen.routeName: (ctx) => const LoginScreen(),
-              ForgetPasswordScreen.routeName: (ctx) => const ForgetPasswordScreen(),
+              ForgetPasswordScreen.routeName: (ctx) =>
+                  const ForgetPasswordScreen(),
+              CategoryScreen.routeName: (ctx) => const CategoryScreen(),
             });
       }),
     );

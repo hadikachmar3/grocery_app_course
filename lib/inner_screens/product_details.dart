@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:grocery_app/widgets/heart_btn.dart';
+import 'package:provider/provider.dart';
 
+import '../providers/cart_provider.dart';
+import '../providers/products_provider.dart';
 import '../services/utils.dart';
 import '../widgets/text_widget.dart';
 
@@ -31,7 +34,15 @@ class _ProductDetailsState extends State<ProductDetails> {
   Widget build(BuildContext context) {
     Size size = Utils(context).getScreenSize;
     final Color color = Utils(context).color;
-
+    final productProvider = Provider.of<ProductsProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final getCurrProduct = productProvider.findProdById(productId);
+    double usedPrice = getCurrProduct.isOnSale
+        ? getCurrProduct.salePrice
+        : getCurrProduct.price;
+    double totalPrice = usedPrice * int.parse(_quantityTextController.text);
+    bool? _isInCart = cartProvider.getCartItems.containsKey(getCurrProduct.id);
     return Scaffold(
       appBar: AppBar(
           leading: InkWell(
@@ -50,7 +61,7 @@ class _ProductDetailsState extends State<ProductDetails> {
         Flexible(
           flex: 2,
           child: FancyShimmerImage(
-            imageUrl: 'https://i.ibb.co/F0s3FHQ/Apricots.png',
+            imageUrl: getCurrProduct.imageUrl,
             boxFit: BoxFit.scaleDown,
             width: size.width,
             // height: screenHeight * .4,
@@ -76,7 +87,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                     children: [
                       Flexible(
                         child: TextWidget(
-                          text: 'title',
+                          text: getCurrProduct.title,
                           color: color,
                           textSize: 25,
                           isTitle: true,
@@ -93,13 +104,13 @@ class _ProductDetailsState extends State<ProductDetails> {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       TextWidget(
-                        text: '\$2.59',
+                        text: '\$${usedPrice.toStringAsFixed(2)}',
                         color: Colors.green,
                         textSize: 22,
                         isTitle: true,
                       ),
                       TextWidget(
-                        text: '/Kg',
+                        text: getCurrProduct.isPiece ? '/Piece' : '/Kg',
                         color: color,
                         textSize: 12,
                         isTitle: false,
@@ -108,9 +119,9 @@ class _ProductDetailsState extends State<ProductDetails> {
                         width: 10,
                       ),
                       Visibility(
-                        visible: true,
+                        visible: getCurrProduct.isOnSale ? true : false,
                         child: Text(
-                          '\$3.9',
+                          '\$${getCurrProduct.price.toStringAsFixed(2)}',
                           style: TextStyle(
                               fontSize: 15,
                               color: color,
@@ -231,7 +242,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                               child: Row(
                                 children: [
                                   TextWidget(
-                                    text: '\$2.59/',
+                                    text: '\$${totalPrice.toStringAsFixed(2)}/',
                                     color: color,
                                     textSize: 20,
                                     isTitle: true,
@@ -256,12 +267,22 @@ class _ProductDetailsState extends State<ProductDetails> {
                           color: Colors.green,
                           borderRadius: BorderRadius.circular(10),
                           child: InkWell(
-                            onTap: () {},
+                            onTap: _isInCart
+                                ? null
+                                : () {
+                                    // if (_isInCart) {
+                                    //   return;
+                                    // }
+                                    cartProvider.addProductsToCart(
+                                        productId: getCurrProduct.id,
+                                        quantity: int.parse(
+                                            _quantityTextController.text));
+                                  },
                             borderRadius: BorderRadius.circular(10),
                             child: Padding(
                                 padding: const EdgeInsets.all(12.0),
                                 child: TextWidget(
-                                    text: 'Add to cart',
+                                    text: _isInCart ? 'In cart' : 'Add to cart',
                                     color: Colors.white,
                                     textSize: 18)),
                           ),
