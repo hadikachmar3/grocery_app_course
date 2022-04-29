@@ -8,6 +8,7 @@ import 'package:grocery_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../provider/dark_theme_provider.dart';
+import '../providers/cart_provider.dart';
 import 'cart/cart_screen.dart';
 
 class BottomBarScreen extends StatefulWidget {
@@ -36,8 +37,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
       'page': const UserScreen(),
       'title': 'user Screen',
     },
-
-
   ];
   void _selectedPage(int index) {
     setState(() {
@@ -48,6 +47,7 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
+
     bool _isDark = themeState.getDarkTheme;
     return Scaffold(
       // appBar: AppBar(
@@ -76,17 +76,21 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             label: "Categories",
           ),
           BottomNavigationBarItem(
-            icon: Badge(
-                toAnimate: true,
-                shape: BadgeShape.circle,
-                badgeColor: Colors.blue,
-                borderRadius: BorderRadius.circular(8),
-                position: BadgePosition.topEnd(top: -7, end: -7),
-                badgeContent: FittedBox(
-                    child: TextWidget(
-                        text: '1', color: Colors.white, textSize: 15)),
-                child: Icon(
-                    _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy)),
+            icon: Consumer<CartProvider>(builder: (_, myCart, ch) {
+              return Badge(
+                  toAnimate: true,
+                  shape: BadgeShape.circle,
+                  badgeColor: Colors.blue,
+                  borderRadius: BorderRadius.circular(8),
+                  position: BadgePosition.topEnd(top: -7, end: -7),
+                  badgeContent: FittedBox(
+                      child: TextWidget(
+                          text: myCart.getCartItems.length.toString(),
+                          color: Colors.white,
+                          textSize: 15)),
+                  child: Icon(
+                      _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),);
+            }),
             label: "Cart",
           ),
           BottomNavigationBarItem(

@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:grocery_app/services/utils.dart';
@@ -6,10 +7,12 @@ import 'package:grocery_app/widgets/heart_btn.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../inner_screens/on_sale_screen.dart';
 import '../inner_screens/product_details.dart';
 import '../models/products_model.dart';
 import '../providers/cart_provider.dart';
+import '../providers/wishlist_provider.dart';
 import '../services/global_methods.dart';
 import 'price_widget.dart';
 
@@ -29,6 +32,10 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
     Size size = Utils(context).getScreenSize;
     final cartProvider = Provider.of<CartProvider>(context);
     bool? _isInCart = cartProvider.getCartItems.containsKey(productModel.id);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(productModel.id);
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
@@ -70,10 +77,23 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                           Row(
                             children: [
                               GestureDetector(
-                                onTap: () {
-                                  cartProvider.addProductsToCart(
-                                      productId: productModel.id, quantity: 1);
-                                },
+                                onTap: _isInCart
+                                    ? null
+                                    : () {
+                                        final User? user =
+                                            authInstance.currentUser;
+                                      
+                                        if (user == null) {
+                                          GlobalMethods.errorDialog(
+                                              subtitle:
+                                                  'No user found, Please login first',
+                                              context: context);
+                                          return;
+                                        }
+                                        cartProvider.addProductsToCart(
+                                            productId: productModel.id,
+                                            quantity: 1);
+                                      },
                                 child: Icon(
                                   _isInCart
                                       ? IconlyBold.bag2
@@ -82,7 +102,10 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                   color: _isInCart ? Colors.green : color,
                                 ),
                               ),
-                              HeartBTN(),
+                              HeartBTN(
+                                productId: productModel.id,
+                                isInWishlist: _isInWishlist,
+                              )
                             ],
                           ),
                         ],

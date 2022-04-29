@@ -1,4 +1,5 @@
 import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:grocery_app/models/products_model.dart';
@@ -7,8 +8,10 @@ import 'package:grocery_app/widgets/price_widget.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
+import '../consts/firebase_consts.dart';
 import '../inner_screens/on_sale_screen.dart';
 import '../inner_screens/product_details.dart';
+import '../providers/wishlist_provider.dart';
 import '../services/global_methods.dart';
 import '../services/utils.dart';
 import 'heart_btn.dart';
@@ -41,6 +44,9 @@ class _FeedsWidgetState extends State<FeedsWidget> {
     final productModel = Provider.of<ProductModel>(context);
     final cartProvider = Provider.of<CartProvider>(context);
     bool? _isInCart = cartProvider.getCartItems.containsKey(productModel.id);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    bool? _isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(productModel.id);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
@@ -76,7 +82,12 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                       isTitle: true,
                     ),
                   ),
-                  const Flexible(flex: 1, child: HeartBTN()),
+                  Flexible(
+                      flex: 1,
+                      child: HeartBTN(
+                        productId: productModel.id,
+                        isInWishlist: _isInWishlist,
+                      )),
                 ],
               ),
             ),
@@ -146,6 +157,14 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                         // if (_isInCart) {
                         //   return;
                         // }
+                        final User? user = authInstance.currentUser;
+
+                        if (user == null) {
+                          GlobalMethods.errorDialog(
+                              subtitle: 'No user found, Please login first',
+                              context: context);
+                          return;
+                        }
                         cartProvider.addProductsToCart(
                             productId: productModel.id,
                             quantity: int.parse(_quantityTextController.text));
