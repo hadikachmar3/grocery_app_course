@@ -10,6 +10,7 @@ import 'package:grocery_app/screens/loading_manager.dart';
 
 import '../../consts/contss.dart';
 import '../../consts/firebase_consts.dart';
+import '../../fetch_screen.dart';
 import '../../services/global_methods.dart';
 import '../../services/utils.dart';
 import '../../widgets/auth_button.dart';
@@ -74,7 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           'createdAt': Timestamp.now(),
         });
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => const BottomBarScreen(),
+          builder: (context) => const FetchScreen(),
         ));
         print('Succefully registered');
       } on FirebaseException catch (error) {

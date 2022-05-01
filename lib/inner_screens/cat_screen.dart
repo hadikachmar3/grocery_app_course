@@ -22,6 +22,7 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   final TextEditingController? _searchTextController = TextEditingController();
   final FocusNode _searchTextFocusNode = FocusNode();
+  List<ProductModel> listProdcutSearch = [];
   @override
   void dispose() {
     _searchTextController!.dispose();
@@ -33,9 +34,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     Size size = Utils(context).getScreenSize;
-    final productProviders = Provider.of<ProductsProvider>(context);
+    final productsProvider = Provider.of<ProductsProvider>(context);
     final catName = ModalRoute.of(context)!.settings.arguments as String;
-    List<ProductModel> productByCat = productProviders.findByCategory(catName);
+    List<ProductModel> productByCat = productsProvider.findByCategory(catName);
     return Scaffold(
       appBar: AppBar(
         leading: const BackWidget(),
@@ -43,7 +44,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         centerTitle: true,
         title: TextWidget(
-          text: 'All Products',
+          text: catName,
           color: color,
           textSize: 20.0,
           isTitle: true,
@@ -63,7 +64,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
                       focusNode: _searchTextFocusNode,
                       controller: _searchTextController,
                       onChanged: (valuee) {
-                        setState(() {});
+                        setState(() {
+                          listProdcutSearch =
+                              productsProvider.searchQuery(valuee);
+                        });
                       },
                       decoration: InputDecoration(
                         focusedBorder: OutlineInputBorder(
@@ -94,20 +98,29 @@ class _CategoryScreenState extends State<CategoryScreen> {
                     ),
                   ),
                 ),
-                GridView.count(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  crossAxisCount: 2,
-                  padding: EdgeInsets.zero,
-                  // crossAxisSpacing: 10,
-                  childAspectRatio: size.width / (size.height * 0.59),
-                  children: List.generate(productByCat.length, (index) {
-                    return ChangeNotifierProvider.value(
-                      value: productByCat[index],
-                      child: const FeedsWidget(),
-                    );
-                  }),
-                ),
+                _searchTextController!.text.isNotEmpty &&
+                        listProdcutSearch.isEmpty
+                    ? const EmptyProdWidget(
+                        text: 'No products found, please try another keyword')
+                    : GridView.count(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        crossAxisCount: 2,
+                        padding: EdgeInsets.zero,
+                        // crossAxisSpacing: 10,
+                        childAspectRatio: size.width / (size.height * 0.59),
+                        children: List.generate(
+                            _searchTextController!.text.isNotEmpty
+                                ? listProdcutSearch.length
+                                : productByCat.length, (index) {
+                          return ChangeNotifierProvider.value(
+                            value: _searchTextController!.text.isNotEmpty
+                                ? listProdcutSearch[index]
+                                : productByCat[index],
+                            child: const FeedsWidget(),
+                          );
+                        }),
+                      ),
               ]),
             ),
     );
