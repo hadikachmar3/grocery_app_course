@@ -99,7 +99,7 @@
      <kbd>
         <img height= "150" src="https://play-lh.googleusercontent.com/NeNhnY4GF01_0GhhukkfNMGyZ88jC14eb8MxQT_4ql8r9KlN0SmW5QLQn2wvSJ0IGg=s180-rw" alt="Flutter helper kit v2">
         <br><br>
-        <font size="1">Flutter helper kit (Light)</font>
+        <font size="1">Flutter helper kit<br>(Light)</font>
         <br>
      </kbd>
   </a>
