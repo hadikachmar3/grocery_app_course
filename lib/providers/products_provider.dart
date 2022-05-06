@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import '../models/products_model.dart';
 
 class ProductsProvider with ChangeNotifier {
-  static final List<ProductModel> _productsList = [];
+  static List<ProductModel> _productsList = [];
   List<ProductModel> get getProducts {
     return _productsList;
   }
@@ -18,6 +18,8 @@ class ProductsProvider with ChangeNotifier {
         .collection('products')
         .get()
         .then((QuerySnapshot productSnapshot) {
+      _productsList = [];
+      // _productsList.clear();
       productSnapshot.docs.forEach((element) {
         _productsList.insert(
             0,

@@ -43,12 +43,15 @@ dependencies:
   badges: ^2.0.2
   flutter_spinkit: ^5.1.0
   fluttertoast: ^8.0.9
+  uuid: ^3.0.6
   # Firebase
   firebase_core: ^1.15.0
   firebase_auth: ^3.3.15
   google_sign_in: ^5.3.0
   cloud_firestore: ^3.1.13
   
+  flutter_stripe: ^2.5.0
+  http: ^0.13.4
 dev_dependencies:
   flutter_test:
     sdk: flutter

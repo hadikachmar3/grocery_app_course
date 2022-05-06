@@ -153,7 +153,7 @@ class _FeedsWidgetState extends State<FeedsWidget> {
               child: TextButton(
                 onPressed: _isInCart
                     ? null
-                    : () {
+                    : () async {
                         // if (_isInCart) {
                         //   return;
                         // }
@@ -165,9 +165,14 @@ class _FeedsWidgetState extends State<FeedsWidget> {
                               context: context);
                           return;
                         }
-                        cartProvider.addProductsToCart(
+                        await GlobalMethods.addToCart(
                             productId: productModel.id,
-                            quantity: int.parse(_quantityTextController.text));
+                            quantity: int.parse(_quantityTextController.text),
+                            context: context);
+                        await cartProvider.fetchCart();
+                        // cartProvider.addProductsToCart(
+                        //     productId: productModel.id,
+                        //     quantity: int.parse(_quantityTextController.text));
                       },
                 child: TextWidget(
                   text: _isInCart ? 'In cart' : 'Add to cart',

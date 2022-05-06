@@ -7,7 +7,7 @@ import 'package:grocery_app/screens/user.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
+import '../providers/dark_theme_provider.dart';
 import '../providers/cart_provider.dart';
 import 'cart/cart_screen.dart';
 

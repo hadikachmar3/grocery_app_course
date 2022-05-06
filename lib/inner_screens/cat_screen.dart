@@ -108,7 +108,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         crossAxisCount: 2,
                         padding: EdgeInsets.zero,
                         // crossAxisSpacing: 10,
-                        childAspectRatio: size.width / (size.height * 0.59),
+                        childAspectRatio: size.width / (size.height * 0.61),
                         children: List.generate(
                             _searchTextController!.text.isNotEmpty
                                 ? listProdcutSearch.length

@@ -29,12 +29,12 @@ class _FeedsScreenState extends State<FeedsScreen> {
     super.dispose();
   }
 
-  // @override
-  // void initState() {
-  //   final productsProvider = Provider.of<ProductsProvider>(context, listen: false);
-  //   productsProvider.fetchProducts();
-  //   super.initState();
-  // }
+  @override
+  void initState() {
+    final productsProvider = Provider.of<ProductsProvider>(context, listen: false);
+    productsProvider.fetchProducts();
+    super.initState();
+  }
   List<ProductModel> listProdcutSearch = [];
   @override
   Widget build(BuildContext context) {
@@ -105,7 +105,7 @@ class _FeedsScreenState extends State<FeedsScreen> {
                   crossAxisCount: 2,
                   padding: EdgeInsets.zero,
                   // crossAxisSpacing: 10,
-                  childAspectRatio: size.width / (size.height * 0.59),
+                  childAspectRatio: size.width / (size.height * 0.61),
                   children: List.generate(
                       _searchTextController!.text.isNotEmpty
                           ? listProdcutSearch.length

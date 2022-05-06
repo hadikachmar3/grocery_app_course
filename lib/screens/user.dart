@@ -13,7 +13,7 @@ import 'package:grocery_app/services/global_methods.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 
-import '../provider/dark_theme_provider.dart';
+import '../providers/dark_theme_provider.dart';
 import 'auth/login.dart';
 
 class UserScreen extends StatefulWidget {
