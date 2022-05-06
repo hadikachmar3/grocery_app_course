@@ -5,6 +5,8 @@
 [![GitHub followers](https://img.shields.io/github/followers/hadikachmar3?logo=GitHub&style=for-the-badge)][github]
 [![GitHub visitor](http://estruyf-github.azurewebsites.net/api/VisitorHit?user=hadikachmar3&repo=Bgstatic&countColorcountColor&countColor=%23007EC6)][github]
 [![Linkedin: HadiKachmar](https://img.shields.io/badge/-CONNECT-blue?style=for-the-badge&logo=Linkedin&link=https://www.linkedin.com/in/hadi-kachmar-27a56a177/)][linkedin]
+[![Facebook: HadiKachmar](https://img.shields.io/badge/Facebook-1877F2?style=for-the-badge&logo=facebook&logoColor=white)][facebook]
+
 
 <h3>
   <a href="https://www.udemy.com/course/flutter-210firebase-build-a-grocery-app-with-admin-panel/?couponCode=EARLY_BIRD">
@@ -108,3 +110,4 @@
 [linkedin]: https://www.linkedin.com/in/hadi-kachmar-27a56a177/
 [github]: https://github.com/hadikachmar3
 [email]: mailto:flutterer.dev@gmail.com
+[facebook]: https://www.facebook.com/Coding-with-Hadi-113431577650864/
