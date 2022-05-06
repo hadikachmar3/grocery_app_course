@@ -23,6 +23,24 @@
      </kbd>
   </a>
   
+  <a href="https://play.google.com/store/apps/details?id=com.hadik3.grocery_course">
+     <kbd>
+        <img height= "150" src="https://play-lh.googleusercontent.com/Lt7uQAzkQzXUdomrKB6oIxK8eOChEkjxzFo9BkAf7dZezAYDfxccvYYiNWiQ0zUeu_zq=s180-rw" alt="Download app">
+        <br>
+        <font size="1">Download and test <br>the app</font>
+        <br><br>
+     </kbd>
+  </a>
+  
+   <a href="https://youtu.be/cXxJmjC1rHw">
+     <kbd>
+        <img height= "150" src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/YouTube_full-color_icon_%282017%29.svg/2560px-YouTube_full-color_icon_%282017%29.svg.png" alt="Watch demo">
+        <br>
+        <font size="1">Wacth app overview</font>
+        <br><br>
+     </kbd>
+  </a>
+</p>
   
 <h3>
   <a href="https://www.udemy.com/user/hadi-kachmar-2/">
@@ -62,7 +80,7 @@
 
 <h3>
   <a href="https://www.udemy.com/user/hadi-kachmar-2/">
-    👨‍🏫 Useful flutter apps
+    😍 Useful flutter apps
   </a>
 </h3>
   
