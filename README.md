@@ -21,7 +21,7 @@
         <br>
         <font size="1">Flutter 2.10&Firebase Build a grocery app<br> with Admin Panel</font>
         <br><br>
-        <font size="2"> - ⭐ </font>
+        <font size="2"> 4.8 ⭐ </font>
      </kbd>
   </a>
   
