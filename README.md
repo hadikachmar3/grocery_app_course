@@ -62,7 +62,7 @@
      </kbd>
   </a>
 </p>
-  
+<hr>
 <h3>
   <a href="https://www.udemy.com/user/hadi-kachmar-2/">
     👨‍🏫 Udemy courses by me
@@ -98,13 +98,13 @@
       </kbd>
    </a>
 </p>
-
+<hr>
 <h3>
   <a href="https://www.udemy.com/user/hadi-kachmar-2/">
     😍 Useful flutter apps
   </a>
 </h3>
-  
+ 
 <p align= "center">
   <a href="https://play.google.com/store/apps/details?id=com.hadik.flutterer">
      <kbd>
