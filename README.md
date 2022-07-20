@@ -39,7 +39,7 @@
         <br>
         <font size="1">Flutter 3.0&Rest API crash course <br> build a News app from zero</font>
         <br><br>
-        <font size="2"> - ⭐ </font>
+        <font size="2"> 5.0 ⭐ </font>
      </kbd>
   </a>
   <a href="https://www.udemy.com/course/flutter-210firebase-build-a-grocery-app-with-admin-panel/?referralCode=B6FA32F8946EF083C9A2">
