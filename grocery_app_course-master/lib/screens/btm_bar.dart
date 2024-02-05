@@ -1,4 +1,6 @@
-import 'package:badges/badges.dart' as badge;
+// import 'package:badges/badges.dart' as badge;
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:grocery_app/screens/categories.dart';
@@ -47,7 +49,6 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
   @override
   Widget build(BuildContext context) {
     final themeState = Provider.of<DarkThemeProvider>(context);
-
     bool isDark = themeState.getDarkTheme;
     return Scaffold(
       // appBar: AppBar(
@@ -76,26 +77,46 @@ class _BottomBarScreenState extends State<BottomBarScreen> {
             label: "Categories",
           ),
           BottomNavigationBarItem(
-            icon: Consumer<CartProvider>(builder: (_, myCart, ch) {
-              return badge.Badge(
-                badgeAnimation: const badge.BadgeAnimation.slide(),
-                badgeStyle: badge.BadgeStyle(
-                  shape: badge.BadgeShape.circle,
-                  badgeColor: Colors.blue,
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                position: badge.BadgePosition.topEnd(top: -7, end: -7),
-                badgeContent: FittedBox(
-                    child: TextWidget(
-                        text: myCart.getCartItems.length.toString(),
-                        color: Colors.white,
-                        textSize: 15)),
-                child: Icon(
-                    _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
-              );
-            }),
+            icon: Consumer<CartProvider>(
+              builder: (_, myCart, ch) {
+                log("myCart.getCartItems.length ${myCart.getCartItems.length}");
+                return Badge.count(
+                  backgroundColor: Colors.red,
+                  textStyle: const TextStyle(fontSize: 10, color: Colors.white),
+                  // alignment: Alignment.topRight,
+                  // offset: const Offset(-7, -7),
+                  // label: Text(myCart.getCartItems.length.toString()),
+                  count: myCart.getCartItems.length,
+                  // isLabelVisible: true,
+                  child: Icon(
+                    _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy,
+                  ),
+                );
+              },
+            ),
             label: "Cart",
           ),
+          // BottomNavigationBarItem(
+          //   icon: Consumer<CartProvider>(builder: (_, myCart, ch) {
+          //     return badge.Badge(
+          //       badgeAnimation: const badge.BadgeAnimation.slide(),
+          //       badgeStyle: badge.BadgeStyle(
+          //         shape: badge.BadgeShape.circle,
+          //         badgeColor: Colors.blue,
+          //         borderRadius: BorderRadius.circular(8),
+          //       ),
+          //       position: badge.BadgePosition.topEnd(top: -7, end: -7),
+          //       badgeContent: FittedBox(
+          //           child: TextWidget(
+          //               text: myCart.getCartItems.length.toString(),
+          //               color: Colors.white,
+          //               textSize: 15)),
+          //       child: Icon(
+          //           _selectedIndex == 2 ? IconlyBold.buy : IconlyLight.buy),
+          //     );
+          //   }),
+          //   label: "Cart",
+          // ),
           BottomNavigationBarItem(
             icon: Icon(
                 _selectedIndex == 3 ? IconlyBold.user2 : IconlyLight.user2),

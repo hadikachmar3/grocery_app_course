@@ -22,7 +22,7 @@ class ProductDetails extends StatefulWidget {
   const ProductDetails({Key? key}) : super(key: key);
 
   @override
-  _ProductDetailsState createState() => _ProductDetailsState();
+  State<ProductDetails> createState() => _ProductDetailsState();
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
@@ -56,10 +56,10 @@ class _ProductDetailsState extends State<ProductDetails> {
         wishlistProvider.getWishlistItems.containsKey(getCurrProduct.id);
 
     final viewedProdProvider = Provider.of<ViewedProdProvider>(context);
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      canPop: true,
+      onPopInvoked: (v) async {
         viewedProdProvider.addProductToHistory(productId: productId);
-        return true;
       },
       child: Scaffold(
         appBar: AppBar(

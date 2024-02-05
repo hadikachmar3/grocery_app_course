@@ -70,6 +70,7 @@ class _UserScreenState extends State<UserScreen> {
       setState(() {
         _isLoading = false;
       });
+      if (!context.mounted) return;
       GlobalMethods.errorDialog(subtitle: '$error', context: context);
     } finally {
       setState(() {
@@ -112,10 +113,7 @@ class _UserScreenState extends State<UserScreen> {
                             fontSize: 25,
                             fontWeight: FontWeight.w600,
                           ),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              print('My name is pressed');
-                            }),
+                          recognizer: TapGestureRecognizer()..onTap = () {}),
                     ],
                   ),
                 ),
@@ -220,6 +218,7 @@ class _UserScreenState extends State<UserScreen> {
                         subtitle: 'Do you wanna sign out?',
                         fct: () async {
                           await authInstance.signOut();
+                          if (!context.mounted) return;
                           Navigator.of(context).push(
                             MaterialPageRoute(
                               builder: (context) => const LoginScreen(),
@@ -264,7 +263,7 @@ class _UserScreenState extends State<UserScreen> {
                         .update({
                       'shipping-address': _addressTextController.text,
                     });
-
+                    if (!context.mounted) return;
                     Navigator.pop(context);
                     setState(() {
                       address = _addressTextController.text;

@@ -4,7 +4,7 @@ import 'package:grocery_app/widgets/categories_widget.dart';
 import 'package:grocery_app/widgets/text_widget.dart';
 
 class CategoriesScreen extends StatelessWidget {
-   CategoriesScreen({Key? key}) : super(key: key);
+  CategoriesScreen({Key? key}) : super(key: key);
 
   List<Color> gridColors = [
     const Color(0xff53B175),
@@ -15,7 +15,7 @@ class CategoriesScreen extends StatelessWidget {
     const Color(0xffB7DFF5),
   ];
 
-List<Map<String, dynamic>> catInfo = [
+  List<Map<String, dynamic>> catInfo = [
     {
       'imgPath': 'assets/images/cat/fruits.png',
       'catText': 'Fruits',
@@ -36,14 +36,13 @@ List<Map<String, dynamic>> catInfo = [
       'imgPath': 'assets/images/cat/spices.png',
       'catText': 'Spices',
     },
-     {
+    {
       'imgPath': 'assets/images/cat/grains.png',
       'catText': 'Grains',
     },
   ];
   @override
   Widget build(BuildContext context) {
-
     final utils = Utils(context);
     Color color = utils.color;
     return Scaffold(
@@ -63,7 +62,7 @@ List<Map<String, dynamic>> catInfo = [
             crossAxisCount: 2,
             childAspectRatio: 240 / 250,
             crossAxisSpacing: 10, // Vertical spacing
-            mainAxisSpacing: 10, // Horizontal spacing 
+            mainAxisSpacing: 10, // Horizontal spacing
             children: List.generate(6, (index) {
               return CategoriesWidget(
                 catText: catInfo[index]['catText'],

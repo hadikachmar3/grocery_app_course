@@ -55,6 +55,7 @@ class _HeartBTNState extends State<HeartBTN> {
             loading = false;
           });
         } catch (error) {
+          if (!context.mounted) return;
           GlobalMethods.errorDialog(subtitle: '$error', context: context);
         } finally {
           setState(() {

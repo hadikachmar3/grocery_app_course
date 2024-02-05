@@ -27,7 +27,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
   Widget build(BuildContext context) {
     final Color color = Utils(context).color;
     final productModel = Provider.of<ProductModel>(context);
-    final theme = Utils(context).getTheme;
+    // final theme = Utils(context).getTheme;
     Size size = Utils(context).getScreenSize;
     final cartProvider = Provider.of<CartProvider>(context);
     bool? isInCart = cartProvider.getCartItems.containsKey(productModel.id);
@@ -50,7 +50,8 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
           },
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Row(
@@ -99,9 +100,7 @@ class _OnSaleWidgetState extends State<OnSaleWidget> {
                                         //     quantity: 1);
                                       },
                                 child: Icon(
-                                  isInCart
-                                      ? IconlyBold.bag2
-                                      : IconlyLight.bag2,
+                                  isInCart ? IconlyBold.bag2 : IconlyLight.bag2,
                                   size: 22,
                                   color: isInCart ? Colors.green : color,
                                 ),

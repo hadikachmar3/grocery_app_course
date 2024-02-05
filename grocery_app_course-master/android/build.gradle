@@ -1,5 +1,6 @@
+// Mon Feb 05 03:57:12 CET 2024
 buildscript {
-    ext.kotlin_version = '1.6.10'
+    ext.kotlin_version = '1.8.22' //'1.9.22'
     repositories {
         google()
         mavenCentral()
